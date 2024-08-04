@@ -126,7 +126,3 @@ Deletes specific objects from an S3 bucket, based on the folder structure.
 ```bash
 chmod +x <script_name>.sh
 ```
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](~/LICENSE) file for details.
