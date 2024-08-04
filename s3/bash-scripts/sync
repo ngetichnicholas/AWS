@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+echo "==Sync Directory to Bucket=="
+
+# Check for bucket name and directory arguments
+if [ -z "$1" ]; then
+    echo "You need to provide a bucket name"
+    exit 1
+fi
+
+if [ -z "$2" ]; then
+    echo "You need to provide a directory to sync"
+    exit 1
+fi
+
+BUCKET_NAME=$1
+DIRECTORY=$2
+REGION="us-east-1"
+
+# Sync the local directory to the bucket
+aws s3 sync "$DIRECTORY" "s3://$BUCKET_NAME/" --region "$REGION"
+
+if [ $? -eq 0 ]; then
+    echo "Directory synced: $DIRECTORY to bucket: $BUCKET_NAME"
+else
+    echo "Failed to sync directory: $DIRECTORY to bucket: $BUCKET_NAME"
+    exit 1
+fi

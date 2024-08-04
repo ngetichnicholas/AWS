@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+echo "==Delete Objects=="
+
+# Check for bucket name and folder arguments
+if [ -z "$1" ]; then
+    echo "You need to provide a bucket name"
+    exit 1
+fi
+
+if [ -z "$2" ]; then
+    echo "You need to provide a folder name"
+    exit 1
+fi
+
+BUCKET_NAME=$1
+FOLDER=$2
+REGION="us-east-1"
+
+# Delete the 5 random files from the bucket
+for i in {1..5}; do
+    FILE="$FOLDER/random_file_$i.txt"
+    aws s3api delete-object --bucket "$BUCKET_NAME" --key "$FILE" --region "$REGION"
+    if [ $? -eq 0 ]; then
+        echo "Object deleted from bucket: $FILE"
+    else
+        echo "Failed to delete $FILE from $BUCKET_NAME"
+        exit 1
+    fi
+done

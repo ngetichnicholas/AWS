@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+
+echo "==Put 5 Random Objects=="
+
+# Check for bucket name and folder arguments
+if [ -z "$1" ]; then
+    echo "You need to provide a bucket name"
+    exit 1
+fi
+
+if [ -z "$2" ]; then
+    echo "You need to provide a folder name"
+    exit 1
+fi
+
+BUCKET_NAME=$1
+FOLDER=$2
+REGION="us-east-1"
+
+# Create the folder if it doesn't exist locally
+if [ ! -d "$FOLDER" ]; then
+    mkdir -p "$FOLDER"
+    if [ $? -eq 0 ]; then
+        echo "Folder created: $FOLDER"
+    else
+        echo "Failed to create folder: $FOLDER"
+        exit 1
+    fi
+fi
+
+# Function to create a random file
+create_random_file() {
+    FILE_NAME="$FOLDER/random_file_$1.txt"
+    echo "This is some random content for file $1" > "$FILE_NAME"
+    echo "$FILE_NAME"
+}
+
+# Create 5 random files and put them in the bucket
+for i in {1..5}; do
+    FILE=$(create_random_file $i)
+    
+    # Check if file was created and is readable
+    if [ ! -f "$FILE" ]; then
+        echo "File not created or not found: $FILE"
+        exit 1
+    fi
+
+    # Extract file name for S3 key
+    FILE_NAME=$(basename "$FILE")
+
+    # Create the full S3 key with the folder path
+    S3_KEY="$FOLDER/$FILE_NAME"
+    
+    # Upload the file
+    aws s3api put-object --bucket "$BUCKET_NAME" --key "$S3_KEY" --body "$FILE" --region "$REGION"
+    if [ $? -eq 0 ]; then
+        echo "Object put in bucket: $S3_KEY"
+    else
+        echo "Failed to upload $FILE to $BUCKET_NAME"
+        exit 1
+    fi
+done
