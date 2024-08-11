@@ -11,7 +11,7 @@ aws s3api create-bucket \
 ```sh
 aws s3api put-public-access-block \
 --bucket aclsbucket231 \
---public-access-block-configuration "BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=false"
+--public-access-block-configuration "BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=false,RestrictPublicBuckets=false"
 ```
 
 ## Change bucket ownership
