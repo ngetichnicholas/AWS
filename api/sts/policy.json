@@ -1,0 +1,9 @@
+{
+    "Statement": [
+       {
+          "Effect": "Allow",
+          "Action": "s3:AssumeRole",
+          "Resource": "arn:aws:iam::150518037113:role/my-sts-fun-stack-StsRole-LqNukCRRU9dJ"
+       }
+    ]
+ }
