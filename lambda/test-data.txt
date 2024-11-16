@@ -1,0 +1,14 @@
+{
+  "Records": [
+    {
+      "s3": {
+        "bucket": {
+          "name": "word-count-lab"
+        },
+        "object": {
+          "key": "backend.txt"
+        }
+      }
+    }
+  ]
+}
