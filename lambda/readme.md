@@ -8,7 +8,7 @@
 
 ## **Prerequisites**
 - An **AWS account** with sufficient permissions to create and manage Lambda, S3, and SNS resources.
-- An SNS topic with at least one confirmed **email subscription** (and optionally an SMS subscription).
+- An SNS topic with at least one confirmed **email subscription**.
 - An S3 bucket for uploading text files.
 - **IAM Role**: Ensure you use the `LambdaAccessRole` or a similar role with the following policies:
   - `AWSLambdaBasicExecutionRole`
