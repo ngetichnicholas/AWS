@@ -2,7 +2,6 @@
 - Automatically triggers when a text file is uploaded to an S3 bucket.
 - Counts the number of words in the uploaded text file.
 - Sends the word count via email using an SNS topic.
-- Optionally supports SMS notifications for the result.
 - Provides structured email messages with the subject: **Word Count Result**.
 
 ---
