@@ -3,3 +3,5 @@ Description: A simple s3 bucket
 Resources:
   MyS3Bucket:
     Type: AWS::S3::Bucket
+    Properties:
+      BucketName: nickdemos3001
